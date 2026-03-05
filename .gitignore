@@ -1,0 +1,56 @@
+# ── Data ────────────────────────────────────────────────────
+# Exclude large raw Yelp files
+data/raw/yelp_academic_dataset_business.json
+data/raw/yelp_academic_dataset_review.json
+data/raw/yelp_academic_dataset_checkin.json
+data/raw/yelp_academic_dataset_tip.json
+data/raw/yelp_academic_dataset_user.json
+# Exclude large processed files
+data/processed/business reviews Tucson.xlsx
+data/processed/business.csv
+data/processed/review.csv
+data/processed/checkin.csv
+data/processed/tip.csv
+data/processed/user.csv
+# Keep: data/processed/business_reviews_tucson.csv
+# Keep: data/raw/category engineering.txt
+models/
+outputs/
+
+# ── Slides ──────────────────────────────────────────────────
+*.pptx
+build_slides.py
+
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Virtual environments ─────────────────────────────────────
+venv/
+env/
+.venv/
+
+# ── Environment variables ────────────────────────────────────
+.env
+.env.local
+
+# ── IDE ──────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.specstory/
+
+# ── Jupyter ──────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── OS ───────────────────────────────────────────────────────
+Thumbs.db
+.DS_Store
+
+# ── Cursor ───────────────────────────────────────────────────
+.cursorindexingignore
