@@ -1,116 +1,27 @@
-# Tucson Nightlife Sentiment Analysis
-### Last Call Insights — NL Consulting
+# [cite_start]Last Call Insights: Tucson Nightlife Sentiment Analysis [cite: 30]
 
-> *"Stars don't tell the full story."*
+[cite_start]*Note: This project was developed collaboratively by the NL Consulting team[cite: 1, 19]. This repository highlights my specific contributions to the overall Natural Language Processing application.*
 
-NLP-driven sentiment analysis of **1,226 Yelp reviews** across **39 Tucson nightlife venues** (2005–2018). This project moves beyond star ratings to surface emotional volatility, dissatisfaction hotspots, and the gap between perceived and actual customer sentiment.
+## 📌 Project Overview
+[cite_start]This project is an NLP-driven sentiment analysis of 1,226 Yelp reviews across 39 Tucson nightlife venues[cite: 31, 32]. [cite_start]The primary goal is to move beyond aggregate star ratings to identify true customer churn drivers and convert those insights into owner-ready business strategies[cite: 33]. [cite_start]We sought to answer whether execution volatility and sentiment dispersion are stronger predictors of customer churn than average star ratings[cite: 23, 25, 27].
 
----
+## 🛠️ My Contributions
+[cite_start]As the **Business Insights Lead for Recommendations & Strategy**, my focus was translating raw data outputs into actionable business intelligence:
+* [cite_start]**Strategic Framework Design:** Formulated the core business questions assessing the gap between public star ratings and actual sentiment stability[cite: 21, 23, 25, 27].
+* [cite_start]**Insight Generation:** Identified that while core product quality (food & drink) is strong across venues, execution volatility (service & atmosphere) is the primary driver of negative reviews[cite: 40, 41, 107].
+* [cite_start]**Performance Benchmarking:** Developed venue-specific profiles to illustrate how reducing execution dispersion protects rating strength and improves repeat customer stability[cite: 87].
 
-## Business Question
+## 📊 Key Findings
+* [cite_start]**Stars Mask Reality:** Star ratings overstate true sentiment across 22 of the 39 venues analyzed[cite: 93].
+* [cite_start]**Execution > Product:** Food and drink dominate 80.8% of reviews, meaning core product quality is generally not the problem[cite: 95, 97]. [cite_start]Service breaks the experience; it is low-volume but high-impact[cite: 108, 110].
+* [cite_start]**Churn is Concentrated:** Dissatisfaction is highly concentrated, with a small number of venues generating the majority of negative signals (e.g., Prep & Pastry's Unhappiness Index was 1.6x higher than the next venue)[cite: 78, 99, 101, 103].
+* [cite_start]**Stability Wins Loyalty:** The market rewards reliable quality over average quality[cite: 115]. [cite_start]Venues demonstrating premium consistency earn long-term loyalty gains[cite: 107, 114].
 
-> *Do star ratings accurately reflect emotional sentiment and service consistency in nightlife venues?*
-
----
-
-## Methods
-
-| Method | Purpose |
-|---|---|
-| **VADER Sentiment Analysis** | Score each review from −1 (negative) to +1 (positive) |
-| **Aspect-Based Sentiment (ABSA)** | Tag reviews by dimension: Food, Service, Atmosphere, Value, Location |
-| **LDA Topic Modeling** | Unsupervised discovery of 21 customer conversation clusters |
-| **Unhappiness Index** | Identify venues generating disproportionate negative feedback |
-| **Rating–Sentiment Gap** | Expose venues overrated or underrated by star scores |
-
----
-
-## Key Findings
-
-- **0.31** average sentiment score — overall positive, but wide variance masks risk
-- **21 topics** discovered via LDA — dining, bar scene, tacos, service quality, and more
-- **Prep & Pastry** leads the Unhappiness Index at 18.3 (79/341 reviews below threshold)
-- Star ratings and sentiment scores **do not align** across multiple venues
+## 💻 Methodology & Tech Stack
+* [cite_start]**Data:** Yelp Academic Dataset (Tucson Nightlife)[cite: 31, 51].
+* [cite_start]**Sentiment Scoring:** VADER sentiment analysis[cite: 63].
+* [cite_start]**Topic Modeling:** Latent Dirichlet Allocation (LDA) resulting in 21 discovered conversation clusters[cite: 63, 84, 85].
+* [cite_start]**Metrics:** Aspect-Based Sentiment Analysis (ABSA), Unhappiness Index, and Rating vs. Sentiment Gap analysis[cite: 63, 67, 71].
 
 ---
-
-## Project Structure
-
-```
-├── data/
-│   ├── raw/
-│   │   └── category engineering.txt
-│   └── processed/
-│       └── business_reviews_tucson.csv   # Main dataset (1,226 reviews, 49 columns)
-├── src/
-│   ├── etl/                              # Data pipeline
-│   │   ├── convert_json_to_csv.py        # Raw Yelp JSON → CSV
-│   │   ├── convert_arizona_reviews.py    # Filter to Tucson nightlife
-│   │   ├── tokenize_reviews.py           # Sentence segmentation + tokenization
-│   │   ├── normalize_reviews.py          # Lemmatization + stopword removal
-│   │   └── pos_filter_reviews.py         # POS tagging + noun/adjective extraction
-│   └── analysis/                         # Analysis scripts
-│       ├── data_quality_check.py         # Missing values, duplicates, range validation
-│       ├── sentiment_by_aspect.py        # ABSA sentiment breakdown
-│       ├── sentiment_trend.py            # Quarterly sentiment trend over time
-│       ├── sentiment_trend_venues.py     # Per-venue sentiment slope (improving/declining)
-│       ├── topic_modeling.py             # LDA topic modeling
-│       ├── topic_visualizations.py       # Topic charts and word distributions
-│       ├── unhappiness_index.py          # Unhappiness Index by venue
-│       ├── rating_sentiment_gap.py       # Star rating vs sentiment gap
-│       ├── top_nouns_adjectives.py       # Most frequent words in reviews
-│       ├── per_restaurant_analysis.py    # Individual venue deep dives
-│       └── engineered_category_frequency.py  # Venue type and food emphasis charts
-├── Images/
-│   ├── preliminary findings/             # Core analysis visualizations
-│   ├── slide_charts/                     # Dark-themed charts for presentation
-│   ├── statistics/                       # Dataset summary charts
-│   ├── Topic Modeling/                   # LDA visualizations
-│   └── per_restaurant/                   # Per-venue charts
-└── requirements.txt
-```
-
----
-
-## Dataset
-
-| Attribute | Value |
-|---|---|
-| Source | Yelp Academic Dataset |
-| Venues | 39 Tucson nightlife businesses |
-| Reviews | 1,226 |
-| Time span | March 2005 – October 2018 |
-| Avg sentiment score | 0.31 |
-| Avg review rating | 4.05 ★ |
-| Vocabulary size | 5,723 unique words (normalized) |
-
-> **Note:** Raw Yelp JSON files are excluded from this repo due to size. Only the processed dataset (`business_reviews_tucson.csv`) is included.
-
----
-
-## Data Quality
-
-- Zero nulls in all core analysis columns
-- Zero exact duplicate reviews
-- 19 `attributes.*` columns have high missingness (18–91%) — excluded from analysis
-- 92 same-day reviews from the same venue with different text — confirmed as legitimate
-
----
-
-## Setup
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the data quality check:
-```bash
-python src/analysis/data_quality_check.py
-```
-
----
-
-## Course
-
-**CIS 509 — Unstructured Data Analytics**
-W. P. Carey School of Business, Arizona State University
+[cite_start]*Original repository code by Ishan Singla (Analytics Lead: AI, NLP & Sentiment Modeling) and project integration by Satya Vemulakonda (Project Manager).* [cite: 13, 14, 15, 16]
